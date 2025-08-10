@@ -1,6 +1,5 @@
-from importlib.resources import files
 import pytesseract
-from PIL import Image  # fix import, use 'from PIL import Image'
+from PIL import Image
 import os
 
 # Print your path here to get the data feeded to gemini api
