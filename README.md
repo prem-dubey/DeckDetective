@@ -24,12 +24,22 @@ The tool must produce a clear, structured output referencing slide numbers and t
 
 ---
 
-## Workflow
+## Explanation of Features and Functionality
+- **PPTX Parsing**:
+Extracts multi-modal content (text, charts, images) from slides. Uses python-pptx for structural data and pytesseract OCR to read embedded images, ensuring comprehensive data extraction.
 
-- Input: PowerPoint file or folder of slide images.
-- Parsing: Extract textual, numerical, and chart data with respective parsers.
-- AI Analysis: Pass structured data to Gemini AI for deep inconsistency detection.
-- Output: Receive and print a structured report highlighting slide-wise factual or logical issues.
+- **Screenshot Parsing**:
+Applies OCR to images to find text regions , capturing numeric and textual information even without access to the original .pptx file.
+
+- **Gemini API Integration**:
+Constructs detailed JSON representations of slide content and submits them to Gemini AI with a carefully designed prompt that asks for identification of factual, logical, and timeline inconsistencies.
+
+- **Structured Output**:
+Presents AI findings clearly in the terminal with slide references and categorized inconsistency descriptions, facilitating quick review and actionable insights.
+
+- **Modularity**:
+Separates concerns cleanly into parsers and the AI interface, allowing future improvements such as additional input formats, enhanced detection algorithms, or UI enhancements without rewriting core logic.
+
 
 ---
 ## Code Explanation
@@ -85,11 +95,18 @@ Set this into your .env file gemini will detect automatically <br>
 
 ---
 
-## Limitations & Future Work
+### Limitations
+- OCR Dependence:
+The accuracy of text extraction from images depends heavily on image quality and formatting. Low resolution or noisy images may reduce effectiveness.
 
-- OCR accuracy depends on input quality; some charts may be missed in images.  
-- API token limits not yet fully managed for very large presentations.  
-- Future improvements include batching and GUI development.
+- API Token Limits:
+Large presentations may exceed Gemini API token limits, and the current implementation does not batch or chunk inputs to mitigate this.
+
+- No GUI:
+The tool operates purely via the terminal interface, which meets the project requirements but may limit user-friendliness.
+
+- Model Dependency:
+The quality and completeness of inconsistency detection rely on the Gemini AI model’s capabilities and prompt design; unusual or domain-specific slides may pose challenges.
 
 ---
 ## 🤝 Credits
